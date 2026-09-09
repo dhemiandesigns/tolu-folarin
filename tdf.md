@@ -1,5 +1,27 @@
 # TDF — Betrayal Care by Tolu Folarin — Build Log
 
+## Mandatory continuity rule
+
+**Every person or AI agent who changes any part of this website must update
+this `tdf.md` file in the same work session.** This includes changes to copy,
+design, layout, assets, interactions, forms, analytics, configuration, GitHub,
+Vercel, domains, DNS, or deployment settings. Do not consider a change
+finished until the corresponding handoff note has been added here.
+
+Each update must record:
+
+- the date and a concise description of what changed;
+- the files, services, or settings affected;
+- important decisions, assumptions, and client instructions;
+- verification performed and its result;
+- anything incomplete, blocked, or requiring follow-up; and
+- any new instructions the next person needs to continue safely.
+
+Never write passwords, access tokens, verification codes, private keys, or
+other secrets in this file. Commit and push the `tdf.md` update together with
+the related website changes so the repository always contains the latest
+handoff state.
+
 ## Project goal
 High-conversion marketing website for Tolu Folarin's counselling practice
 (infidelity / betrayal trauma / relationship therapy), built to receive paid
@@ -339,6 +361,90 @@ python3 -m http.server 8080
 ```
 
 Then visit `http://localhost:8080`.
+
+## GitHub and Vercel deployment handoff (2026-09-09)
+
+### Canonical repository
+
+- GitHub owner: `dhemiandesigns` (DHEMIAN agency account)
+- Repository: `https://github.com/dhemiandesigns/tolu-folarin`
+- Visibility: public
+- Production branch: `main`
+- Local remote: `origin`
+- Initial website commit: `1c15687` (`Initial Tolu Folarin website`)
+
+This GitHub repository is the source of truth. Make changes in this working
+copy, verify them, update this file, commit both the site changes and handoff
+notes, and push to `origin/main`.
+
+### Vercel production deployment
+
+- Vercel scope/team: `dhemian` (DHEMIAN)
+- Vercel project: `tolu-folarin`
+- Project dashboard: `https://vercel.com/dhemian/tolu-folarin`
+- Stable production URL: `https://tolu-folarin.vercel.app`
+- Framework: none; this is a plain static HTML/CSS/JavaScript site
+- Build step: none required
+- Output directory: repository root (`.`)
+- Root directory: repository root
+
+The production URL was deployed and verified on 2026-09-09 with an HTTP 200
+response. The live page title was also confirmed in Chrome as “Betrayal Care
+by Tolu Folarin | Infidelity & Betrayal Trauma Therapy.”
+
+The GitHub repository is connected to the Vercel project. A push to `main`
+creates a production deployment automatically. Pull-request and non-production
+branch changes may create preview deployments. After every push, confirm the
+Vercel deployment succeeds and visually check the stable production URL before
+calling the work complete.
+
+Vercel's GitHub App currently has access only to the
+`dhemiandesigns/tolu-folarin` repository. Do not broaden that access without an
+explicit DHEMIAN decision.
+
+The local folder is linked to this Vercel project through the ignored
+`.vercel/` directory. Do not commit `.vercel/`, Vercel credentials, or other
+machine-specific authentication files.
+
+### Account and ownership decisions
+
+- DHEMIAN is the agency and owns/manages the GitHub repository and Vercel
+  project.
+- Do not create a separate Vercel account for Tolu as part of the current
+  workflow. A client account is only needed later if DHEMIAN explicitly decides
+  to transfer ownership.
+- Other DHEMIAN and client websites should be separate Vercel projects, each
+  connected to its own Git repository and respective domain.
+- The current Vercel workspace is on the Hobby plan. It technically supports up
+  to 200 projects and 50 domains per project, but Vercel describes Hobby as
+  personal/non-commercial. DHEMIAN should use Pro for ongoing commercial client
+  hosting.
+
+### Domain status
+
+No custom domain has been connected yet. The agreed next session task is to
+connect the client's primary domain after confirming the exact domain and
+current DNS provider/settings. Until that is completed and verified, use
+`https://tolu-folarin.vercel.app` as the canonical live link. Do not change DNS
+records without first inspecting the existing records and confirming the exact
+domain target.
+
+### Standard continuation workflow
+
+1. Run `git status` before editing and preserve unrelated user changes.
+2. Pull or otherwise confirm `main` is current before starting new work.
+3. Make and locally verify the requested website change.
+4. Update the relevant existing section of `tdf.md` or add a new dated update.
+5. Review `git diff`, commit the website and `tdf.md` changes together, and push
+   to `origin/main`.
+6. Wait for the connected Vercel production deployment to finish.
+7. Verify `https://tolu-folarin.vercel.app` loads successfully and visually
+   inspect the changed area at relevant desktop and mobile sizes.
+8. Record deployment or verification problems in `tdf.md` before handing off.
+
+If a change should not go live immediately, work on a separate branch and use a
+Vercel preview deployment; do not merge or push that work to `main` until it is
+approved for production.
 
 ## Next steps (suggested priority order)
 1. Get Tolu's sign-off on copy edits (if any) and confirmed location/phone.
