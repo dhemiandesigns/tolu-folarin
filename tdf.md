@@ -375,6 +375,31 @@ throwaway local branch while push was still blocked and have since been
 folded onto `main` on top of `463996e` and pushed — see commit history for
 the exact SHAs.
 
+## v8 update — reverted About section back to seated portrait (2026-09-09)
+Client feedback: the full-length standing portrait (`tolu-about-standing.png`)
+didn't look good on tablet/mobile in the About section. Decision: pull it
+back out of the About section entirely for now — "hold it, we'll find
+another place to use it" — rather than try to fix its sizing there further.
+
+- `index.html`: About section image reverted from
+  `assets/tolu-about-standing.png` back to `assets/tolu-portrait.png` (the
+  seated photo, same one used in the hero).
+- `css/style.css`: `.about-inner`/`.about-media` reverted to the pre-v6
+  treatment — `grid-template-columns: 0.8fr 1.2fr`, `align-items: center`,
+  and the rounded blush-card image treatment
+  (`border-radius: var(--radius-lg); background: var(--blush-200);`) —
+  undoing the height-driven/no-card sizing that v6 introduced specifically
+  for the standing portrait's tall proportions. Mobile override reverted
+  from the `height: clamp(...)` rule back to `max-width: 320px; margin: 0
+  auto;`.
+- **`assets/tolu-about-standing.png` is kept in the repo, just unused** —
+  client wants to place it elsewhere later (a full-length shot is a strong
+  candidate for a future dedicated About page, or a testimonials/trust
+  section). Don't delete this asset.
+- Verified at ~1300px desktop and ~800px tablet: About section is back to
+  the balanced two-column card layout with no stretching or cropping
+  issues.
+
 ## Still placeholder / needs Tolu's input
 - **"Privacy Policy" / "Terms"** footer links are still `#` — no dedicated
   pages built.
