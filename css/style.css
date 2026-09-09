@@ -390,13 +390,23 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: 1.15
 .about { background: var(--cream-050); padding: 110px 0; }
 .about-inner {
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  gap: 64px;
-  align-items: center;
+  grid-template-columns: minmax(200px, 300px) 1fr;
+  gap: 56px;
+  align-items: end;
+}
+/* Full-length standing portrait — sized by height so its natural (tall,
+   narrow) proportions are kept intact rather than stretched into a square
+   column. It floats on the section background like the hero photo does,
+   no card treatment needed. */
+.about-media {
+  height: clamp(480px, 44vw, 680px);
+  display: flex;
+  justify-content: center;
 }
 .about-media img {
-  border-radius: var(--radius-lg);
-  background: var(--blush-200);
+  height: 100%;
+  width: auto;
+  object-fit: contain;
 }
 .about h2 { font-size: clamp(1.9rem, 3.4vw, 2.5rem); color: var(--teal-900); margin-bottom: 10px; }
 .about-credentials { font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--peach-500); font-weight: 600; margin-bottom: 22px; }
@@ -620,7 +630,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: 1.15
   }
   .identify-grid, .process-grid, .testimonial-grid { grid-template-columns: 1fr; }
   .about-inner { grid-template-columns: 1fr; }
-  .about-media { max-width: 320px; margin: 0 auto; }
+  .about-media { height: clamp(380px, 78vw, 520px); margin: 0 auto 8px; }
   .check-list.two-col { grid-template-columns: 1fr; }
   .trust-points { grid-template-columns: 1fr; }
   .main-nav {

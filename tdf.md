@@ -311,6 +311,36 @@ settles (a `reveal` element mid-transition briefly shows a ~24px offset
 from its `translateY` entrance animation — not a layout bug, confirmed by
 re-checking after the transition completes).
 
+## v6 update — second image used in About section (2026-09-09)
+Client added a second asset, originally `assets/tdf about.png` (a
+full-length standing portrait, transparent background, same shoot/outfit as
+the seated hero photo) and asked where it landed. Used it exactly where
+flagged as likely: the About section, replacing the reused seated hero
+photo that was a placeholder there.
+
+- Renamed to `assets/tolu-about-standing.png` (spaces in filenames are
+  fragile in URLs/build tools) and auto-cropped its transparent margins
+  with Pillow the same way as the hero asset (1024×1536 → tight bbox →
+  382×1355 with a 10px pad) — same rationale as before: less dead space to
+  fight with in layout math.
+- This image is very tall and narrow (~0.28 aspect ratio) — a normal
+  width-driven grid column would have forced it to some absurd height (a
+  0.8fr column at desktop widths would have rendered it over 1500px tall).
+  Rewrote `.about-media` to be height-driven instead
+  (`height: clamp(480px, 44vw, 680px)` desktop, `clamp(380px, 78vw, 520px)`
+  mobile), same technique as the hero fix from the previous round — size by
+  the constrained axis, let the other axis stay intrinsic via
+  `object-fit: contain` + `width: auto`.
+- Dropped the old blush-card treatment (`border-radius` + background chip)
+  that was designed for the previous square-ish seated-photo crop — a
+  full-length standing cutout floats directly on the section background
+  instead, the same way the hero photo floats on teal. Narrowed the
+  `.about-inner` grid column from `0.8fr` to `minmax(200px, 300px)` to match
+  the image's natural narrow footprint instead of leaving dead space beside
+  it.
+- Verified at ~1300px desktop and 375px mobile — natural proportions, no
+  stretching, no excess dead space beside the image column.
+
 ## v7 update — desktop headline pushed down one line (2026-09-09)
 Client request (desktop only): push the whole hero headline down so the
 first line ("When trust breaks, you") starts where the second line
@@ -330,25 +360,20 @@ exactly one line of its own text.
   content still ends well before `.hero`'s own bottom). Confirmed
   `margin-top: 0px` still holds at 375px (mobile) — no regression there.
 
-### Git / deployment note — blocked, not resolved
-Per the "GitHub and Vercel deployment handoff" section below, the standard
-workflow is to commit + push straight to `origin/main` (this repo's
-history is a single initial commit, `1c15687`, not yet pushed at all — the
-remote currently has zero branches). Earlier this session, a `git push`
-attempt failed:
+### Git / deployment note
+Earlier in this session, `git push origin main` failed:
 ```
 remote: Permission to dhemiandesigns/tolu-folarin.git denied to cstlelivn.
 ```
-The only GitHub credential stored on this machine (macOS Keychain, used
-automatically by git over HTTPS) belongs to a different account
-(`cstlelivn`) that does not have write access to
-`dhemiandesigns/tolu-folarin`. This change (and the About-section standing
-portrait swap from the previous round) are committed locally but **not
-pushed** — nothing has reached GitHub or triggered a Vercel deployment yet.
-Whoever picks this up needs to either grant `cstlelivn` write access, or
-sign into the correct `dhemiandesigns`-linked GitHub account on this Mac
-(clear the stale osxkeychain credential for github.com, or `gh auth login`
-as the right account) before `git push origin main` will succeed.
+The osxkeychain-cached GitHub credential on this machine belonged to a
+different account (`cstlelivn`) without write access to
+`dhemiandesigns/tolu-folarin`. That got resolved outside this change (the
+`463996e` "Document deployment and handoff workflow" commit landed on
+`origin/main` in the meantime, confirming push access now works). The v6
+(About portrait) and v7 (headline push) commits above were made on a
+throwaway local branch while push was still blocked and have since been
+folded onto `main` on top of `463996e` and pushed — see commit history for
+the exact SHAs.
 
 ## Still placeholder / needs Tolu's input
 - **"Privacy Policy" / "Terms"** footer links are still `#` — no dedicated
