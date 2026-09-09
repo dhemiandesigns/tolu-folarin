@@ -311,6 +311,45 @@ settles (a `reveal` element mid-transition briefly shows a ~24px offset
 from its `translateY` entrance animation — not a layout bug, confirmed by
 re-checking after the transition completes).
 
+## v7 update — desktop headline pushed down one line (2026-09-09)
+Client request (desktop only): push the whole hero headline down so the
+first line ("When trust breaks, you") starts where the second line
+("don't have to face what") used to sit — i.e. shift the headline down by
+exactly one line of its own text.
+
+- Added `margin-top: 1.15em` to `.hero h1` (matches the site's global
+  `h1,h2,h3 { line-height: 1.15 }`, so the shift is always exactly one
+  line regardless of the headline's `clamp()`-driven font size at any
+  desktop width). Reset to `margin-top: 0` inside the
+  `@media (max-width: 980px)` block so mobile/tablet are unaffected, per
+  "on the desktop version" in the request.
+- Verified via `getBoundingClientRect()` at 1440px: h1 top moved from
+  186.5px to 245.4px (a 58.88px shift = the computed line-height at that
+  width, confirmed via `getComputedStyle`), with no overlap into the
+  portrait or overflow past the hero's bottom edge (trust-line/location
+  content still ends well before `.hero`'s own bottom). Confirmed
+  `margin-top: 0px` still holds at 375px (mobile) — no regression there.
+
+### Git / deployment note — blocked, not resolved
+Per the "GitHub and Vercel deployment handoff" section below, the standard
+workflow is to commit + push straight to `origin/main` (this repo's
+history is a single initial commit, `1c15687`, not yet pushed at all — the
+remote currently has zero branches). Earlier this session, a `git push`
+attempt failed:
+```
+remote: Permission to dhemiandesigns/tolu-folarin.git denied to cstlelivn.
+```
+The only GitHub credential stored on this machine (macOS Keychain, used
+automatically by git over HTTPS) belongs to a different account
+(`cstlelivn`) that does not have write access to
+`dhemiandesigns/tolu-folarin`. This change (and the About-section standing
+portrait swap from the previous round) are committed locally but **not
+pushed** — nothing has reached GitHub or triggered a Vercel deployment yet.
+Whoever picks this up needs to either grant `cstlelivn` write access, or
+sign into the correct `dhemiandesigns`-linked GitHub account on this Mac
+(clear the stale osxkeychain credential for github.com, or `gh auth login`
+as the right account) before `git push origin main` will succeed.
+
 ## Still placeholder / needs Tolu's input
 - **"Privacy Policy" / "Terms"** footer links are still `#` — no dedicated
   pages built.
