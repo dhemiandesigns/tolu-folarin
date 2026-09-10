@@ -74,4 +74,18 @@ document.addEventListener('DOMContentLoaded', () => {
       successMsg.hidden = false;
     });
   }
+
+  // Insurance provider dropdown — reveal a free-text field only when
+  // "Other" is chosen, so the common case stays a clean select.
+  const providerSelect = document.getElementById('provider-select');
+  const providerOtherWrap = document.getElementById('provider-other-wrap');
+  const providerOtherInput = document.getElementById('provider-other-input');
+  if (providerSelect && providerOtherWrap && providerOtherInput) {
+    providerSelect.addEventListener('change', () => {
+      const isOther = providerSelect.value === 'other';
+      providerOtherWrap.hidden = !isOther;
+      providerOtherInput.required = isOther;
+      if (!isOther) providerOtherInput.value = '';
+    });
+  }
 });

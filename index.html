@@ -54,7 +54,7 @@
         <a href="#insurance" class="btn btn-link">Check Insurance Coverage</a>
       </div>
       <p class="trust-line">Registered Social Worker &middot; EFT + EMDR &middot; NIHB-Approved &middot; Direct Billing Available</p>
-      <p class="location-line">Calgary &amp; Edmonton, in person. Online across Alberta &amp; Ontario.</p>
+      <p class="location-line">Based in Saskatchewan. Also serving clients online in Alberta &amp; Ontario.</p>
     </div>
   </section>
 
@@ -218,7 +218,7 @@
         </details>
         <details class="faq-item reveal">
           <summary>Are online appointments available?</summary>
-          <p>Yes. Secure online sessions are available across Alberta and Ontario, with in-person options in Calgary and Edmonton.</p>
+          <p>Yes. Secure online sessions are available across Saskatchewan, Alberta and Ontario, with in-person availability in Alberta.</p>
         </details>
         <details class="faq-item reveal">
           <summary>Is the consultation free?</summary>
@@ -250,7 +250,7 @@
       <span class="logo-main">Betrayal Care</span>
       <span class="logo-sub">by Tolu Folarin</span>
       <p>Infidelity, betrayal trauma and relationship therapy.</p>
-      <p class="footer-location">Calgary &middot; Edmonton &middot; Online across Alberta and Ontario</p>
+      <p class="footer-location">Saskatchewan &middot; Online across Alberta and Ontario</p>
       <p class="footer-phone">Phone: <a href="tel:5873247624">(587) 324-7624</a></p>
       <div class="footer-social">
         <a href="https://www.instagram.com/tolu_folarin" target="_blank" rel="noopener">Instagram</a>
@@ -283,7 +283,42 @@
       <label>Full name<input type="text" name="name" required></label>
       <label>Email<input type="email" name="email" required></label>
       <label>Phone number<input type="tel" name="phone" required></label>
-      <label>Insurance provider<input type="text" name="provider"></label>
+      <label>Insurance provider
+        <select name="provider" id="provider-select">
+          <option value="">Select your provider</option>
+          <option>Canada Life</option>
+          <option>Manulife Financial</option>
+          <option>Beneva</option>
+          <option>Desjardins Insurance</option>
+          <option>ClaimSecure</option>
+          <option>Green Shield Canada (GMS)</option>
+          <option>Industrial Alliance (iA)</option>
+          <option>Johnston Group</option>
+          <option>CINUP</option>
+          <option>GroupHEALTH</option>
+          <option>GroupSource</option>
+          <option>Equitable</option>
+          <option>First Canadian</option>
+          <option>Maximum Benefit</option>
+          <option>People Corporation</option>
+          <option>RWAM</option>
+          <option>Simply Benefits</option>
+          <option>UV Insurance</option>
+          <option>BPA &ndash; Benefit Plan Administrators</option>
+          <option>Cowan Insurance Group</option>
+          <option>Manion</option>
+          <option>MDM Insurance Services</option>
+          <option>TELUS AdjudiCare</option>
+          <option>Union Benefits</option>
+          <option>AGA Financial Group</option>
+          <option>Chambers of Commerce Group Insurance Plan</option>
+          <option>Canadian Construction Workers Union</option>
+          <option>LiUNA Local 183</option>
+          <option>LiUNA Local 506</option>
+          <option value="other">Other (not listed)</option>
+        </select>
+      </label>
+      <label id="provider-other-wrap" hidden>Please specify your provider<input type="text" name="providerOther" id="provider-other-input"></label>
       <label>Type of therapy
         <select name="therapyType">
           <option value="individual">Individual therapy</option>
@@ -305,6 +340,6 @@
   </div>
 </div>
 
-<script src="js/main.js"></script>
+<script src="js/main.js?v=2"></script>
 </body>
 </html>

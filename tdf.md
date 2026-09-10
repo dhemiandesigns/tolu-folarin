@@ -489,6 +489,74 @@ width (stacked, full figure visible, no cropping).
   copy-accuracy pass with Tolu before this goes live, the way the
   Betrayal Care homepage copy already was.
 
+## v10 update — Saskatchewan-first positioning, insurer dropdown, cache-busting (2026-09-09)
+Three client requests this round:
+
+**1. Geographic repositioning.** The partner company mentioned earlier (the
+one that may already use "Betrayal Care") operates in Alberta, so the
+client wants this site to lead with Saskatchewan to avoid reading as
+direct competition on the partner's own turf &mdash; without claiming Tolu
+*only* practices in Saskatchewan (she's genuinely licensed in both
+provinces). Updated everywhere a location was named:
+- Hero location line, footer location line (all 5 pages), the FAQ's
+  "online appointments" answer, and the About page's lede/credentials line
+  now all lead with Saskatchewan, with Alberta (and Ontario, online only)
+  mentioned second.
+- Deliberately **dropped the specific "Calgary & Edmonton" in-person
+  callouts** from the hero and footer — those are literally the partner's
+  Alberta cities, and naming them prominently felt like the wrong emphasis
+  given the stated concern. Alberta in-person availability is still
+  mentioned (truthfully, per her Psychology Today profile), just without
+  naming the specific cities.
+- Did **not** invent a Saskatchewan office address or claim in-person
+  availability there — no such location is confirmed in any source, so the
+  copy says "Based in Saskatchewan" (true: BSW from University of Regina,
+  2024 Regina Public Schools Board run) without asserting a clinical
+  address that doesn't exist. Flagging this for Tolu to confirm/correct if
+  she does have a Regina office.
+
+**2. Insurance provider dropdown.** The "Insurance provider" field in the
+coverage-check modal (`index.html` and `insurance.html`) was a free-text
+input — replaced with a `<select>` listing all 29 accepted providers plus
+an "Other (not listed)" option. Selecting "Other" reveals a follow-up text
+field (`#provider-other-wrap` / `#provider-other-input`) via a `change`
+listener in `js/main.js`; that field is hidden and non-required otherwise.
+
+**3. Consulting page discoverability.** Client asked whether Consulting
+should live somewhere more visible than just the footer. My recommendation
+(implemented): keep it **out of the main nav** — Tolu's counselling work
+is still the primary sell and consulting is a secondary offering — but add
+a one-line mention with a link at the bottom of the Services page
+("Tolu also consults with organizations and schools... see consulting
+services"), so anyone actively browsing what she offers finds it without
+it competing for top-level nav real estate. Footer link stays too.
+
+### Two real bugs found and fixed while building the dropdown
+1. **`[hidden]` silently overridden by a more specific rule.** `#coverage-
+   form label { display: flex; ... }` (specificity 0-1-0-1) beat the
+   browser's built-in `[hidden] { display: none }` UA rule (specificity
+   0-0-1-0), so the "Please specify your provider" field showed up even
+   while its `hidden` attribute was set. Fixed with an explicit
+   `#coverage-form label[hidden] { display: none; }` override. Same family
+   of bug as the padding-shorthand issues from v4/v5 — a rule that's
+   "more specific by name" isn't necessarily more specific by CSS
+   specificity rules.
+2. **Stale cached `main.js` during testing** looked identical to a real
+   logic bug (the toggle silently did nothing) until traced to the browser
+   caching the pre-fix script across page loads and even new tabs, since
+   the file has no cache-busting and the dev server sends no explicit
+   cache headers. Confirmed by fetching the file fresh (`cache: 'no-store'`)
+   and eval'ing it directly — the logic was correct all along. Added
+   `?v=2` to every `<script src="js/main.js">` tag across all five pages
+   as a defensive fix, since this static site has no build step to hash
+   filenames automatically — **bump this version query string whenever
+   `main.js` changes**, or returning visitors may run a stale cached copy.
+
+Verified: dropdown + "Other" reveal tested end-to-end in a fresh browser
+tab with the cache-busted script (confirmed via `scripts` array + toggled
+`hidden`/`required` state), and the Saskatchewan-first hero/footer copy
+confirmed visually.
+
 ## Still placeholder / needs Tolu's input
 - **"Privacy Policy" / "Terms"** footer links are still `#` — no dedicated
   pages built.
