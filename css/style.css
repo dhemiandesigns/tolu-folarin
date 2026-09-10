@@ -342,6 +342,7 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: 1.15
 .insurance .hero-actions { justify-content: center; }
 .insurance .btn-link { color: var(--teal-800); }
 .insurer-list { font-size: 0.85rem; color: var(--ink-600); max-width: 620px; margin: 0 auto 14px; }
+.insurer-list a { color: var(--teal-800); text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
 .disclaimer { font-size: 0.82rem; color: var(--ink-600); opacity: 0.8; max-width: 560px; margin: 0 auto; }
 
 /* -------------------- Specialized care -------------------- */
@@ -577,6 +578,117 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: 1.15
 .form-success { text-align: center; padding: 20px 0; }
 .form-success p { font-size: 1.05rem; color: var(--teal-900); }
 
+/* -------------------- Sub-page intro band -------------------- */
+/* Shared small hero for interior pages (Services, Insurance, Consulting) —
+   deliberately lighter-weight than the homepage hero (no portrait), just
+   enough to orient the visitor and carry the page's primary CTA. */
+.page-intro { background: var(--teal-800); color: var(--cream-050); padding: 64px 0 72px; }
+.page-kicker {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--peach-400);
+  margin: 0 0 16px;
+}
+.page-intro h1 { font-size: clamp(2.1rem, 3.8vw, 3rem); max-width: 720px; margin-bottom: 18px; }
+.page-lede { font-size: 1.1rem; opacity: 0.85; max-width: 620px; margin: 0 0 30px; }
+
+/* Consulting intro: two-column variant of .page-intro pairing the
+   full-length standing portrait with the copy. Image is height-driven
+   (object-fit: contain, width: auto) so it keeps its natural proportions
+   at every size — same technique as the hero portrait. */
+.consulting-intro { padding-bottom: 0; }
+.consulting-intro-inner {
+  display: grid;
+  grid-template-columns: 1fr minmax(180px, 240px);
+  gap: 48px;
+  align-items: end;
+}
+.consulting-intro-copy { padding-bottom: 56px; }
+.consulting-intro-media { height: clamp(340px, 30vw, 460px); display: flex; justify-content: center; }
+.consulting-intro-media img { height: 100%; width: auto; object-fit: contain; }
+
+/* -------------------- Services page -------------------- */
+.services-section { background: var(--cream-050); padding: 96px 0; }
+.service-featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  background: var(--teal-900);
+  color: var(--cream-050);
+  border-radius: var(--radius-lg);
+  padding: 56px;
+  margin-bottom: 80px;
+}
+.service-featured .page-kicker { margin-bottom: 12px; }
+.service-featured h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 16px; }
+.service-featured p { opacity: 0.85; margin: 0 0 26px; }
+.service-featured-media img { width: 100%; border-radius: var(--radius-md); background: var(--blush-200); }
+.services-grid-title { text-align: center; margin-bottom: 12px; color: var(--teal-900); font-size: clamp(1.6rem, 2.8vw, 2.1rem); }
+.services-grid-sub { text-align: center; color: var(--ink-600); max-width: 560px; margin: 0 auto 56px; }
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.service-card {
+  background: var(--blush-200);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+}
+.service-card h3 { color: var(--teal-900); font-size: 1.2rem; margin-bottom: 10px; }
+.service-card p { color: var(--ink-600); font-size: 0.95rem; margin: 0 0 18px; }
+.service-card a { color: var(--teal-800); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; font-size: 0.9rem; }
+
+/* -------------------- Insurance landing page -------------------- */
+.insurance-hero-note { background: var(--cream-050); padding: 96px 0 40px; }
+.insurance-hero-note .check-list { max-width: 640px; margin: 0 auto; display: grid; gap: 14px; }
+.insurer-grid-section { background: var(--cream-050); padding: 20px 0 96px; }
+.insurer-grid-title { text-align: center; color: var(--teal-900); font-size: clamp(1.5rem, 2.6vw, 1.9rem); margin-bottom: 8px; }
+.insurer-grid-sub { text-align: center; color: var(--ink-600); margin: 0 0 40px; }
+.insurer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px 24px;
+  max-width: 920px;
+  margin: 0 auto 40px;
+  padding: 0;
+}
+.insurer-grid li {
+  font-size: 0.92rem;
+  color: var(--ink-900);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--blush-300);
+}
+.insurer-note { text-align: center; color: var(--ink-600); font-size: 0.92rem; max-width: 560px; margin: 0 auto; }
+
+/* -------------------- Consulting page -------------------- */
+.consulting-section { background: var(--cream-050); padding: 96px 0; }
+.consulting-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin: 48px 0 64px;
+}
+.consulting-card {
+  background: var(--blush-200);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+}
+.consulting-card h3 { color: var(--teal-900); font-size: 1.1rem; margin-bottom: 10px; }
+.consulting-card p { color: var(--ink-600); font-size: 0.95rem; margin: 0; }
+.consulting-advocacy {
+  background: var(--teal-900);
+  color: var(--cream-050);
+  border-radius: var(--radius-lg);
+  padding: 44px;
+}
+.consulting-advocacy h3 { font-size: 1.3rem; margin-bottom: 14px; }
+.consulting-advocacy p { opacity: 0.85; margin: 0 0 18px; }
+.consulting-advocacy a { color: var(--peach-400); font-weight: 600; }
+
 /* -------------------- Responsive -------------------- */
 @media (max-width: 980px) {
   .hero { min-height: 0; }
@@ -623,6 +735,20 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: 1.15
   .about-media { max-width: 320px; margin: 0 auto; }
   .check-list.two-col { grid-template-columns: 1fr; }
   .trust-points { grid-template-columns: 1fr; }
+  .service-featured { grid-template-columns: 1fr; padding: 36px 28px; gap: 28px; }
+  .service-grid { grid-template-columns: 1fr 1fr; }
+  .consulting-grid { grid-template-columns: 1fr; }
+  .consulting-intro-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .consulting-intro-copy { padding-bottom: 0; }
+  .consulting-intro-media {
+    order: -1;
+    height: clamp(300px, 62vw, 420px);
+    margin: 0 auto 8px;
+  }
+  .insurer-grid { grid-template-columns: repeat(2, 1fr); }
   .main-nav {
     display: none;
     position: absolute;
@@ -646,4 +772,6 @@ h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: 1.15
   .identify, .insurance, .specialized, .process, .about, .testimonials, .faq { padding: 72px 0; }
   .final-cta { padding: 88px 0; }
   .modal { padding: 32px 24px; }
+  .service-grid { grid-template-columns: 1fr; }
+  .insurer-grid { grid-template-columns: 1fr 1fr; gap: 10px 16px; }
 }

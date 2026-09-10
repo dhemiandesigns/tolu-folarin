@@ -400,6 +400,95 @@ another place to use it" — rather than try to fix its sizing there further.
   the balanced two-column card layout with no stretching or cropping
   issues.
 
+## v9 update — site expanded to multiple pages (2026-09-09)
+Client direction: Betrayal Care stays the flagship/homepage specialty (no
+change there), but Tolu also offers the full range of services already
+listed on tolufolarin.ca (couples/infidelity, individual, parenting &
+family, youth, perinatal & postpartum counselling) plus separate consulting
+work (community engagement/outreach strategy, grant writing/funding
+strategy, staff training, social program design, policy development &
+advocacy — she ran for trustee on the Regina Public Schools Board,
+Subdivision 4, in 2024). The insurance section needed to become a real
+landing page with the full accepted-insurer list in a multi-column layout
+instead of one long column. Asked first whether "Betrayal Care" (possibly
+already used by a partner company) needed to change — client chose to
+**keep the name as-is for now**, so no renaming was done anywhere.
+
+**Site is now multi-page** (previously a single `index.html` with anchors):
+- `about.html` — full bio, pulled from tolufolarin.ca/about (re-fetched
+  live to confirm current wording): "Can we actually recover from this?"
+  narrative, credentials (BSW University of Regina, MSW University of
+  Toronto), approach (EFT + EMDR-informed + ART + CBT), and a specialties/
+  expertise grid (top specialties, betrayal-focused expertise, broader
+  clinical support).
+- `services.html` — Betrayal Care featured as the flagship offering in a
+  dark highlighted card (links back to `index.html`), followed by a grid of
+  the other five services (couples/relationship, individual, parenting &
+  family, youth, perinatal & postpartum), each with its own booking link.
+- `insurance.html` — dedicated landing page: NIHB/direct-billing checklist,
+  then the full 29-provider accepted-insurer list in a responsive grid
+  (`.insurer-grid`: 4 columns desktop, 2 columns tablet/mobile) instead of
+  one long list, plus the coverage-check modal (reused from the homepage).
+- `consulting.html` — kept deliberately low-key per "don't want it to
+  overshadow the counselling": **not in the main nav**, linked only from
+  the footer (`Consulting`) on every page. Covers the four consulting
+  service areas plus a policy/advocacy callout (Regina Public Schools Board
+  run, Zao Innovation Hub link).
+
+**Second portrait now used**: `assets/tolu-about-standing.png` (pulled from
+the About section back in v8 for looking bad on tablet/mobile there) is now
+used in `consulting.html`'s intro band — a two-column layout pairing the
+copy with the standing portrait, sized the same way as the hero fix
+(`height: clamp(...)`, `object-fit: contain`, `width: auto` — intrinsic
+proportions, no cropping) and switching to a stacked, centered layout with
+`order: -1` (image above text) under 980px. Chosen because a full-length
+formal shot suits a "consulting" context better than the tighter About-page
+card layout it didn't work in.
+
+**Homepage (`index.html`) updates**:
+- Nav simplified to About / Services / Insurance / FAQs (dropped the
+  "How I Help" nav item now that Services covers that ground more fully;
+  the `#how-i-help` anchor and its content are untouched — the "Find the
+  Right Support" button still scrolls to it).
+- "Learn More About Tolu" now links to `about.html` instead of sending
+  traffic out to Psychology Today.
+- Insurance section's insurer-list line now links to `insurance.html`
+  ("see the full list") instead of just naming a few providers with no
+  follow-through.
+- Footer links expanded: About, Services, Insurance and Fees, Consulting,
+  Book a Consultation, Privacy Policy, Terms — same footer copied onto
+  every new page for consistency.
+
+**New shared CSS** (in `css/style.css`, before the Responsive section):
+`.page-intro` (shared light-hero band for interior pages), `.service-
+featured` / `.service-grid` / `.service-card` (Services page), `.insurer-
+grid` (Insurance page), `.consulting-grid` / `.consulting-advocacy` /
+`.consulting-intro-*` (Consulting page). Responsive collapse rules added
+for all of these in the existing `@media (max-width: 980px)` and
+`(max-width: 600px)` blocks — no new breakpoints introduced.
+
+Verified: all five pages return HTTP 200 locally, nav/footer links resolve
+correctly across pages, the coverage-check modal works from both
+`index.html` and the new `insurance.html`, and the consulting intro image
+was checked at ~1300px (two-column, no overlap) and mobile/tablet pane
+width (stacked, full figure visible, no cropping).
+
+### Still open from this round
+- An extra untracked image, currently `assets/tolu-portrait 2.png` (this
+  filename has already changed once this session — it briefly appeared as
+  `assets/tdf 2Jjpg.jpg` — so don't be surprised if it changes again),
+  showed up in the assets folder mid-session. It has not been reviewed or
+  used anywhere yet. Left uncommitted/untracked intentionally until someone
+  looks at it and decides where (if anywhere) it belongs.
+- Consulting page CTA uses a plain `mailto:tolu.folarintherapy@gmail.com`
+  link (no form) — fine for now given it's a low-traffic page, but revisit
+  if consulting inquiries pick up.
+- The Services page's five secondary service cards (couples, individual,
+  family, youth, perinatal) all use generic descriptive copy written for
+  this build, not pulled from any client-approved source — worth a
+  copy-accuracy pass with Tolu before this goes live, the way the
+  Betrayal Care homepage copy already was.
+
 ## Still placeholder / needs Tolu's input
 - **"Privacy Policy" / "Terms"** footer links are still `#` — no dedicated
   pages built.
